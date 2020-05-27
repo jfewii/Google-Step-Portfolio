@@ -31,52 +31,52 @@ function randomizeImage() {
 }
 
 // modalbtn opens the first modal
-function modalbtn() {
-    var button = document.getElementById("Intro");
-    var modal = document.getElementById("myModal");
+function Intromodal() {
+    let button = document.getElementById("Intro");
+    let modal = document.getElementById("myIntroModal");
     modal.style.display = "block";
 }
 
 // modalbtn2 opens the second modal
-function modalbtn2() {
-    var button = document.getElementById("Interests");
-    var modal = document.getElementById("myModal2");
+function Picturemodal() {
+    let button = document.getElementById("Pictures");
+    let modal = document.getElementById("myPictureModal");
     modal.style.display = "block";
 }
 
 // modalbtn3 opens the third modal
-function modalbtn3() {
-    var button = document.getElementById("Connect");
-    var modal = document.getElementById("myModal3");
+function Connectmodal() {
+    let button = document.getElementById("Connect");
+    let modal = document.getElementById("myConnectModal");
     modal.style.display = "block";
 }
 
 // spanbtn closes the first modal
 function spanbtn(){
-    var span = document.getElementsByClassName("close")[0];
-    var modal = document.getElementById("myModal");
+    let span = document.getElementsByClassName("close")[0];
+    let modal = document.getElementById("myIntroModal");
     modal.style.display = "none";
 }
 
 // spanbtn closes the second modal
 function spanbtn2(){
-    var span = document.getElementsByClassName("close")[0];
-    var modal = document.getElementById("myModal2");
+    let span = document.getElementsByClassName("close")[0];
+    let modal = document.getElementById("myPictureModal");
     modal.style.display = "none";
 }
 
 // spanbtn closes the third modal
 function spanbtn3(){
-    var span = document.getElementsByClassName("close")[0];
-    var modal = document.getElementById("myModal3");
+    let span = document.getElementsByClassName("close")[0];
+    let modal = document.getElementById("myConnectModal");
     modal.style.display = "none";
 }
 
 // closes modal wehen user clicks outside of modal
 window.onclick = function(event) {
-  var modal = document.getElementById("myModal");
-  var modal2 = document.getElementById("myModal2");
-  var modal3 = document.getElementById("myModal3");
+  let modal = document.getElementById("myIntroModal");
+  let modal2 = document.getElementById("myPictureModal");
+  let modal3 = document.getElementById("myConnectModal");
   if (event.target == modal) modal.style.display = "none";
   if (event.target == modal2) modal2.style.display = "none";
   if (event.target == modal3) modal3.style.display = "none";
