@@ -15,23 +15,11 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['images/portrait.JPG', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
 function randomizeImage() {
   // The images directory contains 13 images, so generate a random index between
   // 1 and 13.
-  const imageIndex = Math.floor(Math.random() * 5) + 1;
-  const imgUrl = 'images/jason-' + imageIndex + '.jpg';
+  const imageIndex = Math.floor(Math.random() * 24) + 1;
+  const imgUrl = 'images/jfew-' + imageIndex + '.jpg';
 
   const imgElement = document.createElement('img');
   imgElement.src = imgUrl;
@@ -42,41 +30,54 @@ function randomizeImage() {
   imageContainer.appendChild(imgElement);
 }
 
+// modalbtn opens the first modal
 function modalbtn() {
     var button = document.getElementById("Intro");
     var modal = document.getElementById("myModal");
     modal.style.display = "block";
 }
 
+// modalbtn2 opens the second modal
 function modalbtn2() {
     var button = document.getElementById("Interests");
     var modal = document.getElementById("myModal2");
     modal.style.display = "block";
 }
 
+// modalbtn3 opens the third modal
+function modalbtn3() {
+    var button = document.getElementById("Connect");
+    var modal = document.getElementById("myModal3");
+    modal.style.display = "block";
+}
+
+// spanbtn closes the first modal
 function spanbtn(){
     var span = document.getElementsByClassName("close")[0];
     var modal = document.getElementById("myModal");
     modal.style.display = "none";
 }
 
+// spanbtn closes the second modal
 function spanbtn2(){
     var span = document.getElementsByClassName("close")[0];
     var modal = document.getElementById("myModal2");
     modal.style.display = "none";
 }
 
+// spanbtn closes the third modal
+function spanbtn3(){
+    var span = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById("myModal3");
+    modal.style.display = "none";
+}
 
-// window.onclick = function(event) {
-//   var modal = document.getElementById("myModal");
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
-
-// window.onclick = function(event) {
-//   var modal = document.getElementById("myModal2");
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
+// closes modal wehen user clicks outside of modal
+window.onclick = function(event) {
+  var modal = document.getElementById("myModal");
+  var modal2 = document.getElementById("myModal2");
+  var modal3 = document.getElementById("myModal3");
+  if (event.target == modal) modal.style.display = "none";
+  if (event.target == modal2) modal2.style.display = "none";
+  if (event.target == modal3) modal3.style.display = "none";
+}
