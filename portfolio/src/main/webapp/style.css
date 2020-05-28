@@ -7,3 +7,86 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+#profilepic {
+  height: 80%;
+  width: 80%;
+  border-style: double;
+  border-width: thick;
+}
+
+body {
+  font-family: 'Carrois Gothic';
+}
+
+img {
+  width: 50%;
+  height: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+  font-size: 25px;
+}
+
+h1 {
+  font-size: 45px;
+  text-align: center;
+}
+
+button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  display: inline-block;
+  font-size: 15px;
+}
+
+a {
+  font-size: 25px;
+  padding-right: 20px;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalGrid {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-gap: 10px;
+}

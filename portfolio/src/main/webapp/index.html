@@ -4,15 +4,51 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Carrois Gothic' rel='stylesheet'>
     <script src="script.js"></script>
   </head>
   <body>
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <h1>Welcome To Jason's Portfolio</h1>
+      <img id="profilepic" src="images/jason-1.JPG"/>
+      <br><br>
+      <div class="modalGrid">
+      <button onclick="openIntroModal()" id="Intro">About Me</button> 
+      <div id="myIntroModal" class="modal">
+      <!-- Modal content -->
+        <div class="modal-content">
+          <span onclick="closeIntroModal()" class="close">&times;</span>
+          <p>
+          Hello, my name is Jason Few and I am a rising sophomore at Duke University. I am pursuing a dual degree in Computer Science and Economics. 
+          Last summer, I had the opportunity to attend Google Computer Science Summer Institute (CSSI) in Kirkland, Washington where I developed foundational 
+          skills in HTML, CSS, JavaScript, and Python. Furthermore, we learned how to utilize Google App Engine and develop our own web applications. 
+          At Duke, I am the Treasurer of Duke Black in Business, a member of the National Society of Black Engineers, a music producer for Duke's record label, 
+          Small Town Records, and a member of the club basketball team. I am also a volunteer head basketball coach for 12 elementary school students from 
+          underserved backgrounds in Durham, North Carolina. In my free time, I enjoy playing basketball and golf, making beats, exploring the city with friends, 
+          and working on independent projects. This summer, I look forward to enhancing and developing my technical skills, learning more about Google's culture and community, 
+          working with a diverse and talented group of people.
+          </p>
+        </div>
+      </div>
+      <button onclick="openPictureModal()" id = "Pictures">Favorite Photos</button>
+      <div id="myPictureModal" class="modal">
+        <div class="modal-content">
+          <span onclick="closePictureModal()" class="close">&times;</span>
+          <p>Check out some of my favorite photos.</p>
+          <button onclick="randomizeImage()">Click Here</button><br><br>
+          <div id="random-image-container"></div>
+        </div>
+      </div>
+    <button onclick="openConnectModal()" id = "Connect">Connect With Me</button>
+    <div id="myConnectModal" class="modal">
+      <div class="modal-content">
+        <span onclick="closeConnectModal()" class="close">&times;</span>
+        <p>Feel free to connect with me on LinkedIn and GitHub.</p>
+        <a href="https://www.linkedin.com/in/jasonfewjr/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/jfewii"  target="_blank"> GitHub </a>
+      <div id="random-image-container"></div>
+    </div>
+    </div>
     </div>
   </body>
 </html>
