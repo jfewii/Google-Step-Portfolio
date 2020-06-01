@@ -30,6 +30,12 @@ function randomizeImage() {
   imageContainer.appendChild(imgElement);
 }
 
+async function randomizeQuote(){
+    const response = await fetch('/data');
+    const quote = await response.text();
+    document.getElementById("random-quote-container").innerText = quote;
+}
+
 function openIntroModal() {
   const modal = document.getElementById("myIntroModal");
   modal.style.display = "block";
@@ -43,6 +49,11 @@ function openPictureModal() {
 function openConnectModal() {
   const modal = document.getElementById("myConnectModal");
   modal.style.display = "block";
+}
+
+function openQuoteModal(){
+    const modal = document.getElementById("myQuoteModal");
+    modal.style.display = "block";
 }
 
 function closeIntroModal(){
@@ -60,11 +71,18 @@ function closeConnectModal(){
   modal.style.display = "none";
 }
 
+function closeQuoteModal(){
+    const modal = document.getElementById("myQuoteModal");
+    modal.style.display = "none";
+}
+
 window.onclick = function(event) {
-  const modal = document.getElementById("myIntroModal");
-  const modal2 = document.getElementById("myPictureModal");
-  const modal3 = document.getElementById("myConnectModal");
-  if (event.target === modal) modal.style.display = "none";
-  if (event.target === modal2) modal2.style.display = "none";
-  if (event.target === modal3) modal3.style.display = "none";
+  const introModal = document.getElementById("myIntroModal");
+  const pictureModal = document.getElementById("myPictureModal");
+  const quoteModal = document.getElementById("myQuoteModal");
+  const connectModal = document.getElementById("myConnectModal");
+  if (event.target === introModal) introModal.style.display = "none";
+  if (event.target === pictureModal) pictureModal.style.display = "none";
+  if (event.target === quoteModal) quoteModal.style.display = "none";
+  if (event.target === connectModal) connectModal.style.display = "none";
 }

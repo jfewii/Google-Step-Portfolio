@@ -14,6 +14,8 @@
 
 package com.google.sps.servlets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,9 +26,27 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private List<String> quotes;
+
+  @Override
+  public void init(){
+    quotes = new ArrayList<>();
+    quotes.add("You must be the change you wish to see in the world. - Gandhi");
+    quotes.add("Creativity is intelligence having fun. - Albert Einstein");
+    quotes.add("Whether you think you can or you think you can’t, you’re right. - Henry Ford");
+    quotes.add("Go confidently in the direction of your dreams.  Live the life you have imagined. - Henry David Thoreau");
+    quotes.add("Everything has beauty, but not everyone can see. - Confucius");
+    quotes.add("Impossible is nothing - Muhammad Ali");
+    quotes.add("Don't count the days, make the days count. - Muhammad Ali");
+    quotes.add("Darkness cannot drive out darkness; only light can do that. Hate cannot drive out hate; only love can do that. - Martin Luther King Jr.");
+    quotes.add("The time is always right to do what is right. - Martin Luther King Jr.");
+  }
+
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String quote = quotes.get((int) (Math.random() * quotes.size()));
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Jason</h1>");
+    response.getWriter().println(quote);
   }
 }

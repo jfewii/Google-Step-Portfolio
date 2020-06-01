@@ -90,3 +90,7 @@ a {
   grid-auto-columns: 1fr;
   grid-gap: 10px;
 }
+
+.random-quote-container{
+  font-size: 25px;
+}
