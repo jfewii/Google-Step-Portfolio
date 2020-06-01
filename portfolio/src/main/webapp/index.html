@@ -46,6 +46,16 @@
           <p>Check out some of my favorite quotes.</p>
           <button onclick="randomizeQuote()">Click Here</button><br><br>
           <div id="random-quote-container"></div>
+          <p>Want to add one of your favorites? Complete the form below.</p>
+          <form action="/data" method="POST">
+            <p>Enter your quote.</p>
+            <textarea name="userQuote"></textarea>
+            <br>
+            <p>Who said it?</p>
+            <textarea name="userQuoteAuthor"></textarea>
+            <br><br>
+            <input type="submit" />
+          </form>  
         </div>
       </div>
     <button onclick="openConnectModal()" id = "Connect">Connect With Me</button>

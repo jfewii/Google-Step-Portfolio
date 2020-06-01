@@ -30,7 +30,7 @@ function randomizeImage() {
   imageContainer.appendChild(imgElement);
 }
 
-async function randomizeQuote(){
+async function randomizeQuote() {
   const response = await fetch('/data');
   const quote = await response.text();
   document.getElementById("random-quote-container").innerText = quote;
@@ -51,27 +51,27 @@ function openConnectModal() {
   modal.style.display = "block";
 }
 
-function openQuoteModal(){
+function openQuoteModal() {
   const modal = document.getElementById("myQuoteModal");
   modal.style.display = "block";
 }
 
-function closeIntroModal(){
+function closeIntroModal() {
   const modal = document.getElementById("myIntroModal");
   modal.style.display = "none";
 }
 
-function closePictureModal(){
+function closePictureModal() {
   const modal = document.getElementById("myPictureModal");
   modal.style.display = "none";
 }
 
-function closeConnectModal(){
+function closeConnectModal() {
   const modal = document.getElementById("myConnectModal");
   modal.style.display = "none";
 }
 
-function closeQuoteModal(){
+function closeQuoteModal() {
   const modal = document.getElementById("myQuoteModal");
   modal.style.display = "none";
 }

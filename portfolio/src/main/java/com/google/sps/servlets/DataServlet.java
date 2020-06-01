@@ -15,6 +15,7 @@
 package com.google.sps.servlets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class DataServlet extends HttpServlet {
   private List<String> quotes;
 
   @Override
-  public void init(){
+  public void init() {
     quotes = new ArrayList<>();
     quotes.add("You must be the change you wish to see in the world. - Gandhi");
     quotes.add("Creativity is intelligence having fun. - Albert Einstein");
@@ -59,10 +60,29 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  private String convertToJSON(String quotes){
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String userQuote = getParameter(request, "userQuote", "");
+    String userQuoteAuthor = getParameter(request, "userQuoteAuthor", "");
+
+    response.setContentType("text/html;");
+    response.getWriter().println(userQuote + " - " + userQuoteAuthor);
+
+  }  
+
+  private String convertToJSON(String quotes) {
     GsonBuilder builder = new GsonBuilder();
     builder.disableHtmlEscaping();
     Gson gson = builder.create();
     return gson.toJson(quotes);
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 }
