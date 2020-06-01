@@ -31,9 +31,9 @@ function randomizeImage() {
 }
 
 async function randomizeQuote(){
-    const response = await fetch('/data');
-    const quote = await response.text();
-    document.getElementById("random-quote-container").innerText = quote;
+  const response = await fetch('/data');
+  const quote = await response.text();
+  document.getElementById("random-quote-container").innerText = quote;
 }
 
 function openIntroModal() {
@@ -52,8 +52,8 @@ function openConnectModal() {
 }
 
 function openQuoteModal(){
-    const modal = document.getElementById("myQuoteModal");
-    modal.style.display = "block";
+  const modal = document.getElementById("myQuoteModal");
+  modal.style.display = "block";
 }
 
 function closeIntroModal(){
@@ -72,8 +72,8 @@ function closeConnectModal(){
 }
 
 function closeQuoteModal(){
-    const modal = document.getElementById("myQuoteModal");
-    modal.style.display = "none";
+  const modal = document.getElementById("myQuoteModal");
+  modal.style.display = "none";
 }
 
 window.onclick = function(event) {

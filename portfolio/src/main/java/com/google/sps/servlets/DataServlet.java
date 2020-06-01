@@ -34,12 +34,18 @@ public class DataServlet extends HttpServlet {
     quotes = new ArrayList<>();
     quotes.add("You must be the change you wish to see in the world. - Gandhi");
     quotes.add("Creativity is intelligence having fun. - Albert Einstein");
-    quotes.add("Whether you think you can or you think you can't, you're right. - Henry Ford");
-    quotes.add("Go confidently in the direction of your dreams.  Live the life you have imagined. - Henry David Thoreau");
+    quotes.add(
+        "Whether you think you can or you think you can't, "
+            + "you're right. - Henry Ford");
+    quotes.add(
+        "Go confidently in the direction of your dreams. Live the life you have imagined. "
+            + "- Henry David Thoreau");
     quotes.add("Everything has beauty, but not everyone can see. - Confucius");
-    quotes.add("Impossible is nothing - Muhammad Ali");
+    quotes.add("Impossible is nothing. - Muhammad Ali");
     quotes.add("Don't count the days, make the days count. - Muhammad Ali");
-    quotes.add("Darkness cannot drive out darkness; only light can do that. Hate cannot drive out hate; only love can do that. - Martin Luther King Jr.");
+    quotes.add(
+        "Darkness cannot drive out darkness; only light can do that. "
+            + "Hate cannot drive out hate; only love can do that. - Martin Luther King Jr.");
     quotes.add("The time is always right to do what is right. - Martin Luther King Jr.");
   }
 
@@ -54,10 +60,9 @@ public class DataServlet extends HttpServlet {
   }
 
   private String convertToJSON(String quotes){
-      GsonBuilder builder = new GsonBuilder();
-      builder.disableHtmlEscaping();
-      Gson gson = builder.create();
-      String json = gson.toJson(quotes);
-      return json;
+    GsonBuilder builder = new GsonBuilder();
+    builder.disableHtmlEscaping();
+    Gson gson = builder.create();
+    return gson.toJson(quotes);
   }
 }
