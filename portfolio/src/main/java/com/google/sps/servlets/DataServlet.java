@@ -13,7 +13,8 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class DataServlet extends HttpServlet {
     quotes = new ArrayList<>();
     quotes.add("You must be the change you wish to see in the world. - Gandhi");
     quotes.add("Creativity is intelligence having fun. - Albert Einstein");
-    quotes.add("Whether you think you can or you think you can’t, you’re right. - Henry Ford");
+    quotes.add("Whether you think you can or you think you can't, you're right. - Henry Ford");
     quotes.add("Go confidently in the direction of your dreams.  Live the life you have imagined. - Henry David Thoreau");
     quotes.add("Everything has beauty, but not everyone can see. - Confucius");
     quotes.add("Impossible is nothing - Muhammad Ali");
@@ -46,7 +47,17 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String quote = quotes.get((int) (Math.random() * quotes.size()));
-    response.setContentType("text/html;");
-    response.getWriter().println(quote);
+
+    String json = convertToJSON(quote);
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
+  }
+
+  private String convertToJSON(String quotes){
+      GsonBuilder builder = new GsonBuilder();
+      builder.disableHtmlEscaping();
+      Gson gson = builder.create();
+      String json = gson.toJson(quotes);
+      return json;
   }
 }
