@@ -12,10 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.sps.servlets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -23,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+package com.google.sps.servlets;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -68,7 +67,6 @@ public class DataServlet extends HttpServlet {
 
     response.setContentType("text/html;");
     response.getWriter().println(userQuote + " - " + userQuoteAuthor);
-
   }  
 
   private String convertToJSON(String quotes) {
@@ -80,7 +78,7 @@ public class DataServlet extends HttpServlet {
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
-    if (value == null) {
+    if (value === null) {
       return defaultValue;
     }
     return value;
