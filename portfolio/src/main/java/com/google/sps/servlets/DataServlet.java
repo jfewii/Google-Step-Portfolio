@@ -22,7 +22,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.sps.data.Task;
+import com.google.sps.data.Questions;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,53 +36,45 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> quotes;
-
-  @Override
-  public void init() {
-  }
-
-
-  // Generates a randome quote from the ArrayList Quotes and converts the quote to a JSON object.
+  /** Generates a randome quote from the ArrayList Quotes and converts the quote to a JSON object.*/
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("Questions").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    List<Task> tasks = new ArrayList<>();
+    List<Questions> questions = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String name = (String) entity.getProperty("name");
       String question = (String) entity.getProperty("question");
       long timestamp = (long) entity.getProperty("timestamp");
 
-      Task task = new Task(name, question, timestamp);
-      tasks.add(task);
+      Questions userQuestion = new Questions(name, question, timestamp);
+      questions.add(userQuestion);
     }
 
     Gson gson = new Gson();
 
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(tasks));
+    response.getWriter().println(gson.toJson(questions));
   }
 
-  // Posts the users questions on a message board.
+  /** Posts the users questions on a message board. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Get the input from the form.
-    
+
     String name = request.getParameter("author");
     String question = request.getParameter("description");
     long timestamp = System.currentTimeMillis();
 
-    Entity taskEntity = new Entity("Task");
-    taskEntity.setProperty("name", name);
-    taskEntity.setProperty("question", question);
-    taskEntity.setProperty("timestamp", timestamp);
+    Entity questionEntity = new Entity("Questions");
+    questionEntity.setProperty("name", name);
+    questionEntity.setProperty("question", question);
+    questionEntity.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(taskEntity);
+    datastore.put(questionEntity);
 
     response.sendRedirect("/index.html");
   }  
