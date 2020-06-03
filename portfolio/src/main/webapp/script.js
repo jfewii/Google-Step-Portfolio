@@ -30,10 +30,15 @@ function randomizeImage() {
   imageContainer.appendChild(imgElement);
 }
 
-async function randomizeQuote() {
-  const response = await fetch('/data');
-  const quote = await response.text();
-  document.getElementById("random-quote-container").innerText = quote;
+function displayQuestion() {
+  fetch('/data').then(response => response.json()).then((tasks) => {
+  const questionContainer = document.getElementById("question-container");
+  alert(tasks.name);
+  questionContainer.appendChild(
+      createListElement('Name: ' + tasks.name));
+  questionContainer.appendChild(
+      createListElement('Question: ' + tasks.question));        
+  });
 }
 
 function openIntroModal() {

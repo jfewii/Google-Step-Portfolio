@@ -14,8 +14,15 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.sps.data.Task;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -33,33 +40,31 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void init() {
-    quotes = new ArrayList<>();
-    quotes.add("You must be the change you wish to see in the world. - Gandhi");
-    quotes.add("Creativity is intelligence having fun. - Albert Einstein");
-    quotes.add(
-        "Whether you think you can or you think you can't, "
-            + "you're right. - Henry Ford");
-    quotes.add(
-        "Go confidently in the direction of your dreams. Live the life you have imagined. "
-            + "- Henry David Thoreau");
-    quotes.add("Everything has beauty, but not everyone can see. - Confucius");
-    quotes.add("Impossible is nothing. - Muhammad Ali");
-    quotes.add("Don't count the days, make the days count. - Muhammad Ali");
-    quotes.add(
-        "Darkness cannot drive out darkness; only light can do that. "
-            + "Hate cannot drive out hate; only love can do that. - Martin Luther King Jr.");
-    quotes.add("The time is always right to do what is right. - Martin Luther King Jr.");
   }
 
 
   // Generates a randome quote from the ArrayList Quotes and converts the quote to a JSON object.
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String quote = quotes.get((int) (Math.random() * quotes.size()));
+    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
 
-    String json = convertToJSON(quote);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Task> tasks = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      String name = (String) entity.getProperty("name");
+      String question = (String) entity.getProperty("question");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      Task task = new Task(name, question, timestamp);
+      tasks.add(task);
+    }
+
+    Gson gson = new Gson();
+
     response.setContentType("application/json;");
-    response.getWriter().println(json);
+    response.getWriter().println(gson.toJson(tasks));
   }
 
   // Posts the users questions on a message board.
@@ -67,11 +72,19 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     
-    
-    PrintWriter out = response.getWriter();
-    out.println(
-      request.getParameter("author") + " wants to know: "
-        + request.getParameter("description"));
+    String name = request.getParameter("author");
+    String question = request.getParameter("description");
+    long timestamp = System.currentTimeMillis();
+
+    Entity taskEntity = new Entity("Task");
+    taskEntity.setProperty("name", name);
+    taskEntity.setProperty("question", question);
+    taskEntity.setProperty("timestamp", timestamp);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(taskEntity);
+
+    response.sendRedirect("/index.html");
   }  
 
   private String convertToJSON(String quotes) {
