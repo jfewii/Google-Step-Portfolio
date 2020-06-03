@@ -51,8 +51,8 @@ function openConnectModal() {
   modal.style.display = "block";
 }
 
-function openQuoteModal() {
-  const modal = document.getElementById("myQuoteModal");
+function openQuestionModal() {
+  const modal = document.getElementById("myQuestionModal");
   modal.style.display = "block";
 }
 
@@ -71,18 +71,18 @@ function closeConnectModal() {
   modal.style.display = "none";
 }
 
-function closeQuoteModal() {
-  const modal = document.getElementById("myQuoteModal");
+function closeQuestionModal() {
+  const modal = document.getElementById("myQuestionModal");
   modal.style.display = "none";
 }
 
 window.onclick = function(event) {
   const introModal = document.getElementById("myIntroModal");
   const pictureModal = document.getElementById("myPictureModal");
-  const quoteModal = document.getElementById("myQuoteModal");
+  const questionModal = document.getElementById("myQuestionModal");
   const connectModal = document.getElementById("myConnectModal");
   if (event.target === introModal) introModal.style.display = "none";
   if (event.target === pictureModal) pictureModal.style.display = "none";
-  if (event.target === quoteModal) quoteModal.style.display = "none";
+  if (event.target === questionModal) questionModal.style.display = "none";
   if (event.target === connectModal) connectModal.style.display = "none";
 }

@@ -16,14 +16,14 @@ package com.google.sps.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -52,7 +52,7 @@ public class DataServlet extends HttpServlet {
   }
 
 
-// Generates a randome quote from the ArrayList Quotes and converts the quote to a JSON object.
+  // Generates a randome quote from the ArrayList Quotes and converts the quote to a JSON object.
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String quote = quotes.get((int) (Math.random() * quotes.size()));
@@ -62,15 +62,16 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-// Sends user to google with more information about their favorite quote and author.
+  // Posts the users questions on a message board.
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
-    String userQuote = getParameter(request, "userQuote", "");
-    String userQuoteAuthor = getParameter(request, "userQuoteAuthor", "");
-    String userSearch = userQuote + " " + userQuoteAuthor;
-    String GoogleSearch = String.join("+", userSearch.split(" "));
-    response.sendRedirect("https://www.google.com/search?q=" + GoogleSearch);
+    
+    
+    PrintWriter out = response.getWriter();
+    out.println(
+      request.getParameter("author") + " wants to know: "
+        + request.getParameter("description"));
   }  
 
   private String convertToJSON(String quotes) {
