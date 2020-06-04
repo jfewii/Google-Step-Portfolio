@@ -31,13 +31,14 @@ function randomizeImage() {
 }
 
 function displayQuestion() {
-  fetch('/data').then(response => response.json()).then((tasks) => {
+  console.log("called displayQuestion");
+  fetch('/data').then(response => response.json()).then((Questions) => {
   const questionContainer = document.getElementById("question-container");
-  alert(tasks.name);
-  questionContainer.appendChild(
-      createListElement('Name: ' + tasks.name));
-  questionContainer.appendChild(
-      createListElement('Question: ' + tasks.question));        
+  var createPelement = document.createElement("p");
+  var createNode = document.createTextNode("Name: " + Questions.name + "asked: " + Questions.question);
+  createPelement.appendChild(createNode);
+  questionContainer.appendChild(node);
+  console.log(Questions.name);      
   });
 }
 

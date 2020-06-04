@@ -22,7 +22,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.sps.data.Questions;
+import com.google.sps.data.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  /** Generates a randome quote from the ArrayList Quotes and converts the quote to a JSON object.*/
+  /** Generates a random quote from the ArrayList Quotes and converts the quote to a JSON object.*/
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Questions").addSort("timestamp", SortDirection.DESCENDING);
@@ -44,20 +44,18 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    List<Questions> questions = new ArrayList<>();
+    List<Question> questions = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String name = (String) entity.getProperty("name");
       String question = (String) entity.getProperty("question");
       long timestamp = (long) entity.getProperty("timestamp");
 
-      Questions userQuestion = new Questions(name, question, timestamp);
+      Question userQuestion = new Question(name, question, timestamp);
       questions.add(userQuestion);
     }
 
-    Gson gson = new Gson();
-
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(questions));
+    response.getWriter().println(convertToJSON(questions));
   }
 
   /** Posts the users questions on a message board. */
@@ -76,19 +74,20 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(questionEntity);
 
-    response.sendRedirect("/index.html");
+    // response.sendRedirect("/index.html");
   }  
 
-  private String convertToJSON(String quotes) {
+  private String convertToJSON(List questions) {
     GsonBuilder builder = new GsonBuilder();
     builder.disableHtmlEscaping();
     Gson gson = builder.create();
-    return gson.toJson(quotes);
+    return gson.toJson(questions);
   }
 
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+  private String getParameter(HttpServletRequest request, String name) {
     String value = request.getParameter(name);
-    if (value == null) return defaultValue;
+    if (value == null) return "";
     return value;
   }
+
 }
