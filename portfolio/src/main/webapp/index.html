@@ -40,7 +40,7 @@
           <div id="random-image-container"></div>
         </div>
       </div>
-      <button onclick="openQuestionModal()" id = "Questions" style="color: white">QnA</button>
+      <button onclick="openQuestionModal()" id = "Questions" style="color: white">Ask a Question</button>
       <div id="myQuestionModal" class="modal">
         <div class="modal-content">
           <span onclick="closeQuestionModal()" class="close">&times;</span>
@@ -57,11 +57,18 @@
                 <textarea name="description" id="description" rows="10" cols="50" class="form-control"></textarea>
               </div>
               <br><br>
-              <button type="submit" onclick="displayQuestion()" style="color: white">Save</button>
+              <button type="submit" style="color: white">Save</button>
             </form>
           </div>     
         </div>
-      </div>  
+      </div>
+      <button onclick="openViewModal()" id = "questionView" style="color: white">View Questions</button>
+      <div id="myQuestionViewModal" class="modal">
+        <div class="modal-content">
+          <span onclick="closeViewModal()" class="close">&times;</span>
+          <ol id="question-container"></ol>
+        </div>
+      </div>            
       <button onclick="openConnectModal()" id = "Connect" style="color: white">Connect With Me</button>
         <div id="myConnectModal" class="modal">
           <div class="modal-content">
@@ -71,7 +78,6 @@
             <a href="https://github.com/jfewii"  target="_blank"> GitHub </a>
           </div>
         </div>
-        <div id="question-container"></div>
       </div>
     </div>
   </body>

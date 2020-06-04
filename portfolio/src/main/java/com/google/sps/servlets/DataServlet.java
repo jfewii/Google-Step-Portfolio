@@ -74,7 +74,7 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(questionEntity);
 
-    // response.sendRedirect("/index.html");
+    response.sendRedirect("/index.html");
   }  
 
   private String convertToJSON(List questions) {
