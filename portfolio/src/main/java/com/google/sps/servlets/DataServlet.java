@@ -36,19 +36,23 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private static final String QUESTION_ENTITY_NAME = "name";
+  private static final String QUESTION_ENTITY_TEXT = "text";
+  private static final String QUESTION_ENTITY_TIMESTAMP = "timestamp";
+
   /** Returns all questions posted */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Questions").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("Questions").addSort(QUESTION_ENTITY_TIMESTAMP, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     List<Question> questions = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
-      String name = (String) entity.getProperty("name");
-      String text = (String) entity.getProperty("text");
-      long timestamp = (long) entity.getProperty("timestamp");
+    for (Entity questionEntity : results.asIterable()) {
+      String name = (String) questionEntity.getProperty(QUESTION_ENTITY_NAME);
+      String text = (String) questionEntity.getProperty(QUESTION_ENTITY_TEXT);
+      long timestamp = (long) questionEntity.getProperty(QUESTION_ENTITY_TIMESTAMP);
 
       Question userQuestion = new Question(name, text, timestamp);
       questions.add(userQuestion);
@@ -62,14 +66,14 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    String name = request.getParameter("name");
-    String text = request.getParameter("text");
+    String name = request.getParameter(QUESTION_ENTITY_NAME);
+    String text = request.getParameter(QUESTION_ENTITY_TEXT);
     long timestamp = System.currentTimeMillis();
 
     Entity questionEntity = new Entity("Questions");
-    questionEntity.setProperty("name", name);
-    questionEntity.setProperty("text", text);
-    questionEntity.setProperty("timestamp", timestamp);
+    questionEntity.setProperty(QUESTION_ENTITY_NAME, name);
+    questionEntity.setProperty(QUESTION_ENTITY_TEXT, text);
+    questionEntity.setProperty(QUESTION_ENTITY_TIMESTAMP, timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(questionEntity);
