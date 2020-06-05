@@ -55,12 +55,14 @@ function openViewModal() {
   modal.style.display = "block";
   fetch('/data').then(response => response.json()).then((Questions) => {
   const questionContainer = document.getElementById("question-container");
+  questionContainer.innerHTML = '';
   var i;
   for (i = 0; i < Questions.length; i++) {
     var createPelement = document.createElement("LI");
     var createNode = document.createTextNode(Questions[i].name + " asked: " + Questions[i].question);
     createPelement.appendChild(createNode);
     questionContainer.appendChild(createPelement);
+    if (i === 30) break;
     }
   });    
 }
