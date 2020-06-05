@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  /** Generates a random quote from the ArrayList Quotes and converts the quote to a JSON object.*/
+  /** Returns all questions posted */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Questions").addSort("timestamp", SortDirection.DESCENDING);
@@ -89,5 +89,4 @@ public class DataServlet extends HttpServlet {
     if (value == null) return "";
     return value;
   }
-
 }

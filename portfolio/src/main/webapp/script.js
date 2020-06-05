@@ -56,7 +56,7 @@ function openViewModal() {
   fetch('/data').then(response => response.json()).then((Questions) => {
   const questionContainer = document.getElementById("question-container");
   var i;
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < Questions.length; i++) {
     var createPelement = document.createElement("LI");
     var createNode = document.createTextNode(Questions[i].name + " asked: " + Questions[i].question);
     createPelement.appendChild(createNode);
