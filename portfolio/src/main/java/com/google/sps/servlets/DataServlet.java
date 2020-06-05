@@ -47,10 +47,10 @@ public class DataServlet extends HttpServlet {
     List<Question> questions = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String name = (String) entity.getProperty("name");
-      String question = (String) entity.getProperty("question");
+      String text = (String) entity.getProperty("text");
       long timestamp = (long) entity.getProperty("timestamp");
 
-      Question userQuestion = new Question(name, question, timestamp);
+      Question userQuestion = new Question(name, text, timestamp);
       questions.add(userQuestion);
     }
 
@@ -62,13 +62,13 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    String name = request.getParameter("author");
-    String question = request.getParameter("description");
+    String name = request.getParameter("name");
+    String text = request.getParameter("text");
     long timestamp = System.currentTimeMillis();
 
     Entity questionEntity = new Entity("Questions");
     questionEntity.setProperty("name", name);
-    questionEntity.setProperty("question", question);
+    questionEntity.setProperty("text", text);
     questionEntity.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

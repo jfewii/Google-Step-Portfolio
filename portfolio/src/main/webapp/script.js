@@ -59,10 +59,10 @@ function openViewModal() {
   var i;
   for (i = 0; i < Questions.length; i++) {
     var createPelement = document.createElement("LI");
-    var createNode = document.createTextNode(Questions[i].name + " asked: " + Questions[i].question);
+    var createNode = document.createTextNode(Questions[i].name + " asked: " + Questions[i].text);
     createPelement.appendChild(createNode);
     questionContainer.appendChild(createPelement);
-    if (i === 30) break;
+    if (i === 9) break;
     }
   });    
 }

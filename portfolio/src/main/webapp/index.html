@@ -48,13 +48,13 @@
             <center>
             <form method="POST" action="/data">
               <div>
-                <label for="author">Name</label>
-                <input type="text" name="author" id="author" class="form-control" />
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control" />
               </div>
               <br><br>
               <div>
-                <label for="description">Question</label>
-                <textarea name="description" id="description" rows="10" cols="50" class="form-control"></textarea>
+                <label for="text">Question</label>
+                <textarea name="text" id="text" rows="10" cols="50" class="form-control"></textarea>
               </div>
               <br><br>
               <button type="submit" style="color: white">Save</button>
@@ -66,6 +66,9 @@
       <div id="myQuestionViewModal" class="modal">
         <div class="modal-content">
           <span onclick="closeViewModal()" class="close">&times;</span>
+          <center>
+          <p>View some of the latest questions.</p>
+          </center>    
           <ol id="question-container"></ol>
         </div>
       </div>            
