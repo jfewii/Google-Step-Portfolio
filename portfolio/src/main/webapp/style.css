@@ -31,6 +31,10 @@ p {
   font-size: 25px;
 }
 
+li {
+  font-size: 23px;  
+}
+
 h1 {
   font-size: 45px;
   text-align: center;
@@ -45,6 +49,7 @@ button {
   font-size: 15px;
 }
 
+/* Reference to links */ 
 a {
   font-size: 25px;
   padding-right: 20px;
@@ -89,4 +94,8 @@ a {
   display: grid;
   grid-auto-columns: 1fr;
   grid-gap: 10px;
+}
+
+.random-quote-container{
+  font-size: 25px;
 }

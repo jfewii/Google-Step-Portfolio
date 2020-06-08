@@ -5,6 +5,7 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Carrois Gothic' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="script.js"></script>
   </head>
   <body>
@@ -13,7 +14,7 @@
       <img id="profilepic" src="images/jason-1.JPG"/>
       <br><br>
       <div class="modalGrid">
-      <button onclick="openIntroModal()" id="Intro">About Me</button> 
+      <button onclick="openIntroModal()" id="Intro" style="color: white">About Me</button> 
       <div id="myIntroModal" class="modal">
       <!-- Modal content -->
         <div class="modal-content">
@@ -30,25 +31,57 @@
           </p>
         </div>
       </div>
-      <button onclick="openPictureModal()" id = "Pictures">Favorite Photos</button>
+      <button onclick="openPictureModal()" id="Pictures" style="color: white">Favorite Photos</button>
       <div id="myPictureModal" class="modal">
         <div class="modal-content">
           <span onclick="closePictureModal()" class="close">&times;</span>
           <p>Check out some of my favorite photos.</p>
-          <button onclick="randomizeImage()">Click Here</button><br><br>
+          <button onclick="randomizeImage()" style="color: white">Click Here</button><br><br>
           <div id="random-image-container"></div>
         </div>
       </div>
-    <button onclick="openConnectModal()" id = "Connect">Connect With Me</button>
-    <div id="myConnectModal" class="modal">
-      <div class="modal-content">
-        <span onclick="closeConnectModal()" class="close">&times;</span>
-        <p>Feel free to connect with me on LinkedIn and GitHub.</p>
-        <a href="https://www.linkedin.com/in/jasonfewjr/" target="_blank">LinkedIn</a>
-        <a href="https://github.com/jfewii"  target="_blank"> GitHub </a>
-      <div id="random-image-container"></div>
-    </div>
-    </div>
+      <button onclick="openQuestionModal()" id="Questions" style="color: white">Ask a Question</button>
+      <div id="myQuestionModal" class="modal">
+        <div class="modal-content">
+          <span onclick="closeQuestionModal()" class="close">&times;</span>
+          <div class="container">
+            <center>
+            <form method="POST" action="/data">
+              <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control" />
+              </div>
+              <br><br>
+              <div>
+                <label for="text">Question</label>
+                <textarea name="text" id="text" rows="10" cols="50" class="form-control"></textarea>
+              </div>
+              <br><br>
+              <button type="submit" style="color: white">Save</button>
+            </form>
+          </div>     
+        </div>
+      </div>
+      <button onclick="openViewModal()" id="questionView" style="color: white">View Questions</button>
+      <div id="myQuestionViewModal" class="modal">
+        <div class="modal-content">
+          <span onclick="closeViewModal()" class="close">&times;</span>
+          <center>
+          <p>View some of the latest questions.</p>
+          </center>    
+          <ol id="question-container"></ol>
+        </div>
+      </div>            
+      <button onclick="openConnectModal()" id= "Connect" style="color: white">Connect With Me</button>
+        <div id="myConnectModal" class="modal">
+          <div class="modal-content">
+            <span onclick="closeConnectModal()" class="close">&times;</span>
+            <p>Feel free to connect with me on LinkedIn and GitHub.</p>
+            <a href="https://www.linkedin.com/in/jasonfewjr/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/jfewii" target="_blank"> GitHub </a>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

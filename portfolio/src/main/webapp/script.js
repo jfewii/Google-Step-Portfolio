@@ -15,6 +15,8 @@
 /**
  * Adds a random greeting to the page.
  */
+const MAX_QUESTIONS = 9;
+
 function randomizeImage() {
   // The images directory contains 13 images, so generate a random index between
   // 1 and 13.
@@ -45,26 +47,60 @@ function openConnectModal() {
   modal.style.display = "block";
 }
 
-function closeIntroModal(){
+function openQuestionModal() {
+  const modal = document.getElementById("myQuestionModal");
+  modal.style.display = "block";
+}
+
+function openViewModal() {
+  const modal = document.getElementById("myQuestionViewModal");
+  modal.style.display = "block";
+  fetch('/data').then(response => response.json()).then((questions) => {
+    const questionContainer = document.getElementById("question-container");
+    questionContainer.innerHTML = "";
+    for (let i = 0; i < questions.length && i < MAX_QUESTIONS; i++) {
+      const createElement = document.createElement("li");
+      const createNode = document.createTextNode(questions[i].name + " asked: " + questions[i].text);
+      createElement.appendChild(createNode);
+      questionContainer.appendChild(createElement);
+    }
+  });    
+}
+
+function closeIntroModal() {
   const modal = document.getElementById("myIntroModal");
   modal.style.display = "none";
 }
 
-function closePictureModal(){
+function closePictureModal() {
   const modal = document.getElementById("myPictureModal");
   modal.style.display = "none";
 }
 
-function closeConnectModal(){
+function closeConnectModal() {
   const modal = document.getElementById("myConnectModal");
   modal.style.display = "none";
 }
 
+function closeQuestionModal() {
+  const modal = document.getElementById("myQuestionModal");
+  modal.style.display = "none";
+}
+
+function closeViewModal() {
+  const modal = document.getElementById("myQuestionViewModal");
+  modal.style.display = "none";
+}
+
 window.onclick = function(event) {
-  const modal = document.getElementById("myIntroModal");
-  const modal2 = document.getElementById("myPictureModal");
-  const modal3 = document.getElementById("myConnectModal");
-  if (event.target === modal) modal.style.display = "none";
-  if (event.target === modal2) modal2.style.display = "none";
-  if (event.target === modal3) modal3.style.display = "none";
+  const introModal = document.getElementById("myIntroModal");
+  const pictureModal = document.getElementById("myPictureModal");
+  const questionModal = document.getElementById("myQuestionModal");
+  const viewModal = document.getElementById("myQuestionViewModal");
+  const connectModal = document.getElementById("myConnectModal");
+  if (event.target === introModal) introModal.style.display = "none";
+  if (event.target === pictureModal) pictureModal.style.display = "none";
+  if (event.target === questionModal) questionModal.style.display = "none";
+  if (event.target === viewModal) viewModal.style.display = "none";  
+  if (event.target === connectModal) connectModal.style.display = "none";
 }
