@@ -15,6 +15,8 @@
 /**
  * Adds a random greeting to the page.
  */
+const MAX_QUESTIONS = 9;
+
 function randomizeImage() {
   // The images directory contains 13 images, so generate a random index between
   // 1 and 13.
@@ -53,15 +55,15 @@ function openQuestionModal() {
 function openViewModal() {
   const modal = document.getElementById("myQuestionViewModal");
   modal.style.display = "block";
-  fetch('/data').then(response => response.json()).then((Questions) => {
-  const questionContainer = document.getElementById("question-container");
-  questionContainer.innerHTML = '';
-  for (let i = 0; i < Questions.length; i++) {
-    const createElement = document.createElement("li");
-    var createNode = document.createTextNode(Questions[i].name + " asked: " + Questions[i].text);
-    createElement.appendChild(createNode);
-    questionContainer.appendChild(createElement);
-    if (i === 9) break;}
+  fetch('/data').then(response => response.json()).then((questions) => {
+    const questionContainer = document.getElementById("question-container");
+    questionContainer.innerHTML = "";
+    for (let i = 0; i < questions.length && i < MAX_QUESTIONS; i++) {
+      const createElement = document.createElement("li");
+      const createNode = document.createTextNode(questions[i].name + " asked: " + questions[i].text);
+      createElement.appendChild(createNode);
+      questionContainer.appendChild(createElement);
+    }
   });    
 }
 
