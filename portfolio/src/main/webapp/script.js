@@ -106,9 +106,9 @@ window.onclick = function(event) {
 }
 
 function createMap() {
-  const HoustonMap = new google.maps.Map(document.getElementById("HoustonMap"), {
+  const houstonMap = new google.maps.Map(document.getElementById("houston-map"), {
     center: {lat: 29.7604, lng: -95.3698},
-    zoom: 12,
+    zoom: 4,
     styles: [
       {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
       {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -188,7 +188,9 @@ function createMap() {
         elementType: 'labels.text.stroke',
         stylers: [{color: '#17263c'}]
       }
-    ]
+    ]  
   });
+  const highschool = {lat: 29.7425, lng: -95.4288};
+  const marker = new google.maps.Marker({position: highschool, map: houstonMap});
 }
 
