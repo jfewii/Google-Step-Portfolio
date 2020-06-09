@@ -190,7 +190,11 @@ function createMap() {
       }
     ]  
   });
-  const highschool = {lat: 29.7425, lng: -95.4288};
-  const marker = new google.maps.Marker({position: highschool, map: houstonMap});
+  const myHighSchool = {lat: 29.7425, lng: -95.4288};
+  const myCollege = {lat: 36.0014, lng: -78.9382};
+  const highSchoolMarker = new google.maps.Marker({position: myHighSchool, map: houstonMap,
+    title: "My High School"});
+  const CollegeMarker = new google.maps.Marker({position: myCollege, map: houstonMap,
+    title: "My College"});  
 }
 
