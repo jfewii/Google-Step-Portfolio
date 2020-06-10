@@ -15,6 +15,9 @@
 /**
  * Adds a random greeting to the page.
  */
+ google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
 const MAX_QUESTIONS = 9;
 const DUKE_IMG = "/images/duke1.png";
 const SJS_IMG = "/images/sjsSeal.png";
@@ -198,6 +201,32 @@ function createMap() {
   const highSchoolMarker = new google.maps.Marker({position: myHighSchool, map: usaMap,
     title: "My High School", icon: SJS_IMG});
   const CollegeMarker = new google.maps.Marker({position: myCollege, map: usaMap,
-    title: "My College", icon: DUKE_IMG});  
+    title: "My College", icon: DUKE_IMG});
 }
 
+/* Chart code begins here */
+
+function drawChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Activity');
+  data.addColumn('number', 'Count');
+    data.addRows([
+      ['Work', 60],
+      ['Music Production', 7],
+      ['Golf', 12],
+      ['Basketball', 5],
+      ['Video Games', 3],
+      ['Reading', 7],
+      ['Netflix', 6]
+    ]);
+
+  const visualSetup = {
+    'title': 'My Time Each Week',
+    'width':800,
+    'height':600
+  };
+
+  const chart = new google.visualization.PieChart(
+    document.getElementById('chart-container'));
+  chart.draw(data, visualSetup);
+}
