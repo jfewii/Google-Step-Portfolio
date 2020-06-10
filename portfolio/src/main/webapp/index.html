@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Carrois Gothic' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChtWJMFXH0DlILyHUWmZG7g_5-BFPJolQ"></script>    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChtWJMFXH0DlILyHUWmZG7g_5-BFPJolQ"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>    
     <script src="script.js"></script>
+    <script src="chart.js"></script>
+    <script src="map.js"></script>
   </head>
   <body onload="createMap();">
     <div id="content">
@@ -85,7 +88,10 @@
       </div>
       <br><br>
       <center>
-      <div id="usa-map"></div>  
+      <div id="usa-map"></div>
+      <br><br>
+      <h1>How I spend the weeks!</h1>
+      <div id="chart-container"></div>  
       <br>   
     </div>
   </body>
