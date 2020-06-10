@@ -108,7 +108,8 @@ window.onclick = function(event) {
 }
 
 function createMap() {
-  const myUSAMap = new google.maps.Map(document.getElementById("usa-map"), {
+  const usaMap = new google.maps.Map(document.getElementById("usa-map"), {
+    /* Coordinates are the center of the USA */  
     center: {lat: 39.8283, lng: -98.5795},
     zoom: 4,
     styles: [
@@ -194,9 +195,9 @@ function createMap() {
   });
   const myHighSchool = {lat: 29.7425, lng: -95.4288};
   const myCollege = {lat: 36.0014, lng: -78.9382};
-  const highSchoolMarker = new google.maps.Marker({position: myHighSchool, map: myUSAMap,
+  const highSchoolMarker = new google.maps.Marker({position: myHighSchool, map: usaMap,
     title: "My High School", icon: SJS_IMG});
-  const CollegeMarker = new google.maps.Marker({position: myCollege, map: myUSAMap,
+  const CollegeMarker = new google.maps.Marker({position: myCollege, map: usaMap,
     title: "My College", icon: DUKE_IMG});  
 }
 
