@@ -16,6 +16,8 @@
  * Adds a random greeting to the page.
  */
 const MAX_QUESTIONS = 9;
+const DUKE_IMG = "/images/duke1.png";
+const SJS_IMG = "/images/sjsSeal.png";
 
 function randomizeImage() {
   // The images directory contains 13 images, so generate a random index between
@@ -106,8 +108,9 @@ window.onclick = function(event) {
 }
 
 function createMap() {
-  const houstonMap = new google.maps.Map(document.getElementById("houston-map"), {
-    center: {lat: 29.7604, lng: -95.3698},
+  const usaMap = new google.maps.Map(document.getElementById("usa-map"), {
+    /* Coordinates are the center of the USA */  
+    center: {lat: 39.8283, lng: -98.5795},
     zoom: 4,
     styles: [
       {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -192,9 +195,9 @@ function createMap() {
   });
   const myHighSchool = {lat: 29.7425, lng: -95.4288};
   const myCollege = {lat: 36.0014, lng: -78.9382};
-  const highSchoolMarker = new google.maps.Marker({position: myHighSchool, map: houstonMap,
-    title: "My High School"});
-  const CollegeMarker = new google.maps.Marker({position: myCollege, map: houstonMap,
-    title: "My College"});  
+  const highSchoolMarker = new google.maps.Marker({position: myHighSchool, map: usaMap,
+    title: "My High School", icon: SJS_IMG});
+  const CollegeMarker = new google.maps.Marker({position: myCollege, map: usaMap,
+    title: "My College", icon: DUKE_IMG});  
 }
 
