@@ -84,7 +84,7 @@ function closePictureModal() {
   modal.style.display = "none";
 }
 
-function closeMachineeModal() {
+function closeMachineModal() {
   const modal = document.getElementById("myMachineModal");
   modal.style.display = "none";
 }
