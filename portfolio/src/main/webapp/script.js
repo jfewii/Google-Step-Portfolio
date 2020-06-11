@@ -39,6 +39,11 @@ function openPictureModal() {
   modal.style.display = "block";
 }
 
+function openSpotifyModal() {
+  const modal = document.getElementById("mySpotifyModal");
+  modal.style.display = "block";
+}
+
 function openConnectModal() {
   const modal = document.getElementById("myConnectModal");
   modal.style.display = "block";
@@ -74,6 +79,11 @@ function closePictureModal() {
   modal.style.display = "none";
 }
 
+function closeSpotifyModal() {
+  const modal = document.getElementById("mySpotifyModal");
+  modal.style.display = "none";
+}
+
 function closeConnectModal() {
   const modal = document.getElementById("myConnectModal");
   modal.style.display = "none";
@@ -92,11 +102,13 @@ function closeViewModal() {
 window.onclick = function(event) {
   const introModal = document.getElementById("myIntroModal");
   const pictureModal = document.getElementById("myPictureModal");
+  const spotifyModal = document.getElementById("mySpotifyModal");  
   const questionModal = document.getElementById("myQuestionModal");
   const viewModal = document.getElementById("myQuestionViewModal");
   const connectModal = document.getElementById("myConnectModal");
   if (event.target === introModal) introModal.style.display = "none";
   if (event.target === pictureModal) pictureModal.style.display = "none";
+  if (event.target === spotifyModal) spotifyModal.style.display = "none";  
   if (event.target === questionModal) questionModal.style.display = "none";
   if (event.target === viewModal) viewModal.style.display = "none";  
   if (event.target === connectModal) connectModal.style.display = "none";
