@@ -44,6 +44,17 @@
           <div id="random-image-container"></div>
         </div>
       </div>
+      <button onclick="openSpotifyModal()" id="Spotify" style="color: white">Spotify Playlist</button>
+      <div id="mySpotifyModal" class="modal">
+        <div class="modal-content">
+          <span onclick="closeSpotifyModal()" class="close">&times;</span>
+          <p>Check out one of my favorite Spotify playlists.</p>
+          <center>
+            <iframe src="https://open.spotify.com/embed/playlist/6RBDoqFMEf98dxVfrilbRW" width="1000" 
+              height="475" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          </center>  
+        </div>
+      </div>      
       <button onclick="openQuestionModal()" id="Questions" style="color: white">Ask a Question</button>
       <div id="myQuestionModal" class="modal">
         <div class="modal-content">
@@ -92,7 +103,7 @@
       <br><br>
       <h1>How I spend the weeks!</h1>
       <div id="chart-container"></div>  
-      <br>   
+      <br>
     </div>
   </body>
 </html>
