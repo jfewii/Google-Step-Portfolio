@@ -31,26 +31,30 @@ public final class FindMeetingQuery {
 
     Collection<TimeRange> available = Arrays.asList(TimeRange.WHOLE_DAY);
     Collection<String> attendees = new ArrayList(request.getAttendees());
-
+    
+    /* If meeting is longer than the whole day, return empty list */
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
-        return Arrays.asList();
+      return Arrays.asList();
     }
 
+    /* If there are no attendees, return TimeRange of whole day */
     if (attendees.isEmpty()) {
       return Arrays.asList(TimeRange.WHOLE_DAY);  
     }
 
-    for (Event event: events) {
+    for (Event event : events) {
       
       Collection<TimeRange> newAvailableTimes = new ArrayList<TimeRange>();  
       TimeRange eventTime = event.getWhen();
       
-      for (TimeRange avaliableTime: available) {
-        if (! eventTime.overlaps(avaliableTime)) {
+      for (TimeRange avaliableTime : available) {
+          
+        if (!eventTime.overlaps(avaliableTime)) {
           newAvailableTimes.add(avaliableTime);
           continue;
         }
 
+        /* Creates TimeRange object of the availibe meeting time range before the event starts */
         if (eventTime.start() > avaliableTime.start()) {
           TimeRange timeDifference = TimeRange.fromStartEnd(avaliableTime.start(), eventTime.start(), false);
           if (timeDifference.duration() >= request.getDuration()) {
@@ -58,21 +62,16 @@ public final class FindMeetingQuery {
           }
         }
 
+        /* Creates TimeRange object of the availibe meeting time range after the event ends */
         if (avaliableTime.end() > eventTime.end()) {
           TimeRange timeDifference = TimeRange.fromStartEnd(eventTime.end(), avaliableTime.end(), false);
           if (timeDifference.duration() >= request.getDuration()) {
             newAvailableTimes.add(timeDifference);
           } 
         }
-        
       }
-
       available = newAvailableTimes;
-
     }
-
     return available;
-
   }
-
 }
