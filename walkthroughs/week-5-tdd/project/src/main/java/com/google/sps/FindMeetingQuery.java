@@ -29,7 +29,7 @@ public final class FindMeetingQuery {
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
-    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()){
+    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
         return Arrays.asList();
     }
 
@@ -37,7 +37,7 @@ public final class FindMeetingQuery {
     Collection<TimeRange> available = Arrays.asList(TimeRange.WHOLE_DAY);
     Collection<String> attendees = new ArrayList(request.getAttendees());
 
-    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()){
+    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
         return Arrays.asList();
     }
 
