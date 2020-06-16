@@ -29,11 +29,6 @@ public final class FindMeetingQuery {
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
-    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
-        return Arrays.asList();
-    }
-
-
     Collection<TimeRange> available = Arrays.asList(TimeRange.WHOLE_DAY);
     Collection<String> attendees = new ArrayList(request.getAttendees());
 
@@ -63,7 +58,7 @@ public final class FindMeetingQuery {
           }
         }
 
-        if (eventTime.end() > eventTime.end()) {
+        if (avaliableTime.end() > eventTime.end()) {
           TimeRange timeDifference = TimeRange.fromStartEnd(eventTime.end(), avaliableTime.end(), false);
           if (timeDifference.duration() >= request.getDuration()) {
             newAvailableTimes.add(timeDifference);
