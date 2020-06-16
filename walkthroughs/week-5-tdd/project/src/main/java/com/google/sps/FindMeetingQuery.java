@@ -14,10 +14,36 @@
 
 package com.google.sps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.logging.Logger;
+
 
 public final class FindMeetingQuery {
+
+  private static Logger log = Logger.getLogger("FindMeetingQuery");
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+
+    List<TimeRange> listEvents = new ArrayList<TimeRange>();
+
+    for(Event event: events) {
+      listEvents.add(event.getWhen());  
+    } 
+    
+    log.info("Event Times: " + listEvents);
+    Collections.sort(listEvents, TimeRange.ORDER_BY_START);
+
+    for(TimeRange event: listEvents) {
+      System.out.println(event);   
+    } 
+
+    return null;
+
   }
+
 }
