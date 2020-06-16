@@ -45,9 +45,10 @@ public final class FindMeetingQuery {
     for (Event event : events) {
       
       Collection<TimeRange> availableTimesAroundEvent = new ArrayList<TimeRange>();  
-      TimeRange eventTime = event.getWhen();
       
       for (TimeRange availableTime : originalAvailableTimes) {
+
+        TimeRange eventTime = event.getWhen();
 
         if (!eventTime.overlaps(availableTime)) {
           availableTimesAroundEvent.add(availableTime);
@@ -56,17 +57,17 @@ public final class FindMeetingQuery {
 
         // Creates TimeRange object of the available meeting time range before the event starts 
         if (eventTime.start() > availableTime.start()) {
-          TimeRange timeDifference = TimeRange.fromStartEnd(availableTime.start(), eventTime.start(), false);
-          if (timeDifference.duration() >= request.getDuration()) {
-            availableTimesAroundEvent.add(timeDifference);
+          TimeRange availableTimeBeforeEvent = TimeRange.fromStartEnd(availableTime.start(), eventTime.start(), false);
+          if (availableTimeBeforeEvent.duration() >= request.getDuration()) {
+            availableTimesAroundEvent.add(availableTimeBeforeEvent);
           }
         }
 
         // Creates TimeRange object of the available meeting time range after the event ends 
         if (availableTime.end() > eventTime.end()) {
-          TimeRange timeDifference = TimeRange.fromStartEnd(eventTime.end(), availableTime.end(), false);
-          if (timeDifference.duration() >= request.getDuration()) {
-            availableTimesAroundEvent.add(timeDifference);
+          TimeRange availableTimeBeforeEvent = TimeRange.fromStartEnd(eventTime.end(), availableTime.end(), false);
+          if (availableTimeBeforeEvent.duration() >= request.getDuration()) {
+            availableTimesAroundEvent.add(availableTimeBeforeEvent);
           } 
         }
       }
