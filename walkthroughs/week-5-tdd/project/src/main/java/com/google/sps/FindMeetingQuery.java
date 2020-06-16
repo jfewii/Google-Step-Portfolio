@@ -22,27 +22,61 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 
-
+/* FindMeetingQuery determines if people can have meetings based on each persons avaliable times */
 public final class FindMeetingQuery {
 
-  private static Logger log = Logger.getLogger("FindMeetingQuery");
+  private static Logger log = Logger.getLogger(FindMeetingQuery.class.getName());
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
-    List<TimeRange> listEvents = new ArrayList<TimeRange>();
+    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()){
+        return Arrays.asList();
+    }
 
-    for(Event event: events) {
-      listEvents.add(event.getWhen());  
-    } 
-    
-    log.info("Event Times: " + listEvents);
-    Collections.sort(listEvents, TimeRange.ORDER_BY_START);
 
-    for(TimeRange event: listEvents) {
-      System.out.println(event);   
-    } 
+    Collection<TimeRange> available = Arrays.asList(TimeRange.WHOLE_DAY);
+    Collection<String> attendees = new ArrayList(request.getAttendees());
 
-    return null;
+    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()){
+        return Arrays.asList();
+    }
+
+    if (attendees.isEmpty()) {
+      return Arrays.asList(TimeRange.WHOLE_DAY);  
+    }
+
+    for (Event event: events) {
+      
+      Collection<TimeRange> newAvailableTimes = new ArrayList<TimeRange>();  
+      TimeRange eventTime = event.getWhen();
+      
+      for (TimeRange avaliableTime: available) {
+        if (! eventTime.overlaps(avaliableTime)) {
+          newAvailableTimes.add(avaliableTime);
+          continue;
+        }
+
+        if (eventTime.start() > avaliableTime.start()) {
+          TimeRange timeDifference = TimeRange.fromStartEnd(avaliableTime.start(), eventTime.start(), false);
+          if (timeDifference.duration() >= request.getDuration()) {
+            newAvailableTimes.add(timeDifference);
+          }
+        }
+
+        if (eventTime.end() > eventTime.end()) {
+          TimeRange timeDifference = TimeRange.fromStartEnd(eventTime.end(), avaliableTime.end(), false);
+          if (timeDifference.duration() >= request.getDuration()) {
+            newAvailableTimes.add(timeDifference);
+          } 
+        }
+        
+      }
+
+      available = newAvailableTimes;
+
+    }
+
+    return available;
 
   }
 
