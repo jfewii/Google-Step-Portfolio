@@ -57,7 +57,8 @@ public final class FindMeetingQuery {
 
         // Creates TimeRange object of the available meeting time range before the event starts 
         if (eventTime.start() > availableTime.start()) {
-          TimeRange availableTimeBeforeEvent = TimeRange.fromStartEnd(availableTime.start(), eventTime.start(), false);
+          TimeRange availableTimeBeforeEvent = 
+            TimeRange.fromStartEnd(availableTime.start(), eventTime.start(), false);
           if (availableTimeBeforeEvent.duration() >= request.getDuration()) {
             availableTimesAroundEvent.add(availableTimeBeforeEvent);
           }
@@ -65,9 +66,10 @@ public final class FindMeetingQuery {
 
         // Creates TimeRange object of the available meeting time range after the event ends 
         if (availableTime.end() > eventTime.end()) {
-          TimeRange availableTimeBeforeEvent = TimeRange.fromStartEnd(eventTime.end(), availableTime.end(), false);
-          if (availableTimeBeforeEvent.duration() >= request.getDuration()) {
-            availableTimesAroundEvent.add(availableTimeBeforeEvent);
+          TimeRange availableTimeAfterEvent = 
+            TimeRange.fromStartEnd(eventTime.end(), availableTime.end(), false);
+          if (availableTimeAfterEvent.duration() >= request.getDuration()) {
+            availableTimesAroundEvent.add(availableTimeAfterEvent);
           } 
         }
       }
