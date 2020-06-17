@@ -30,7 +30,8 @@ public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
     Collection<TimeRange> originalAvailableTimes = Arrays.asList(TimeRange.WHOLE_DAY);
-    Collection<String> attendees = new ArrayList(request.getAttendees());
+    HashSet<String> attendees = new HashSet(request.getAttendees());
+    HashSet<String> eventAttendees = new HashSet<String>();
     
     // If meeting is longer than the whole day, return empty list 
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
@@ -44,7 +45,8 @@ public final class FindMeetingQuery {
 
     for (Event event : events) {
       
-      Collection<TimeRange> availableTimesAroundEvent = new ArrayList<TimeRange>();  
+      Collection<TimeRange> availableTimesAroundEvent = new ArrayList<TimeRange>();
+      eventAttendees.addAll(event.getAttendees());  
       
       for (TimeRange availableTime : originalAvailableTimes) {
 
@@ -75,6 +77,12 @@ public final class FindMeetingQuery {
       }
       originalAvailableTimes = availableTimesAroundEvent;
     }
-    return originalAvailableTimes;
+    boolean checkAttendees = eventAttendees.equals(attendees);
+    if(checkAttendees) {
+      return originalAvailableTimes;
+    }
+    else {
+      return Arrays.asList(TimeRange.WHOLE_DAY);  
+    }
   }
 }
