@@ -27,12 +27,27 @@ public final class FindMeetingQuery {
 
   private static Logger log = Logger.getLogger(FindMeetingQuery.class.getName());
 
+  private static boolean ifAttending(Event event, HashSet<String> requestAttending) {
+    for (String eventAttendee : event.getAttendees()) {
+      for (String requestAttendee : requestAttending) {
+        if (requestAttendee.equals(eventAttendee)) {
+          return true;  
+        }  
+      }  
+    }
+    return false;  
+  }
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
     Collection<TimeRange> originalAvailableTimes = Arrays.asList(TimeRange.WHOLE_DAY);
     HashSet<String> attendees = new HashSet(request.getAttendees());
-    HashSet<String> eventAttendees = new HashSet<String>();
-    
+
+    if (request.getOptionalAttendees().size() >= 1) {  
+      attendees.addAll(request.getOptionalAttendees());  
+    }
+
+
     // If meeting is longer than the whole day, return empty list 
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
       return Arrays.asList();
@@ -46,8 +61,9 @@ public final class FindMeetingQuery {
     for (Event event : events) {
       
       Collection<TimeRange> availableTimesAroundEvent = new ArrayList<TimeRange>();
-      eventAttendees.addAll(event.getAttendees());  
       
+      if (!ifAttending(event, attendees)) continue;
+
       for (TimeRange availableTime : originalAvailableTimes) {
 
         TimeRange eventTime = event.getWhen();
@@ -76,13 +92,26 @@ public final class FindMeetingQuery {
         }
       }
       originalAvailableTimes = availableTimesAroundEvent;
+
+      if (originalAvailableTimes.isEmpty()) {
+        if (request.getAttendees().isEmpty()) {
+          return Arrays.asList();    
+        }  
+        if (request.getOptionalAttendees().size() >= 1) {
+          for (String person : attendees) {
+            if (request.getOptionalAttendees().contains(person)) {
+              attendees.remove(person);  
+            }  
+          }
+          MeetingRequest newRequest =
+            new MeetingRequest(attendees, request.getDuration());
+          return query(events, newRequest);  
+        }
+        else {
+          return Arrays.asList();  
+        }  
+      }
     }
-    boolean checkAttendees = eventAttendees.equals(attendees);
-    if(checkAttendees) {
-      return originalAvailableTimes;
-    }
-    else {
-      return Arrays.asList(TimeRange.WHOLE_DAY);  
-    }
+    return originalAvailableTimes; 
   }
 }
