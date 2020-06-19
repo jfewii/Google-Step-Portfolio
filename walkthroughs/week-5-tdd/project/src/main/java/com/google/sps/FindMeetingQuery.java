@@ -62,7 +62,9 @@ public final class FindMeetingQuery {
       
       Collection<TimeRange> availableTimesAroundEvent = new ArrayList<TimeRange>();
       
-      if (!ifAttending(event, attendees)) continue;
+      if (!ifAttending(event, attendees)) {
+        continue;  
+      }
 
       for (TimeRange availableTime : originalAvailableTimes) {
 
@@ -106,8 +108,7 @@ public final class FindMeetingQuery {
           MeetingRequest newRequest =
             new MeetingRequest(attendees, request.getDuration());
           return query(events, newRequest);  
-        }
-        else {
+        }else {
           return Arrays.asList();  
         }  
       }
